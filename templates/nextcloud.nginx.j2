@@ -30,9 +30,6 @@ server {
 	# See php.ini: upload_max_filesize, post_max_size, max_execution_time, max_input_time
 	client_max_body_size 10G;
 	fastcgi_buffers 64 4K;
-	mp4;
-	mp4_buffer_size 20M;
-	mp4_max_buffer_size 300M;
 	send_timeout 10m;
 
 	fastcgi_cache CLOUD;		# Enable PHP caching
@@ -67,6 +64,9 @@ server {
 		include php-fpm;
 		fastcgi_request_buffering off;
 		fastcgi_param front_controller_active true;
+		mp4;
+		mp4_buffer_size 20M;
+		mp4_max_buffer_size 300M;
 	}
 
 	# Must be BELOW the "location ~ \.php(?:$|/)" block
