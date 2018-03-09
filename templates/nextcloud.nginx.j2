@@ -64,10 +64,14 @@ server {
 		include php-fpm;
 		fastcgi_request_buffering off;
 		fastcgi_param front_controller_active true;
-		mp4;
-		mp4_buffer_size 20M;
-		mp4_max_buffer_size 300M;
+#		fastcgi_param MOD_X_ACCEL_REDIRECT_ENABLED on;
 	}
+
+	# use X-Accel to bypass PHP
+	#	location ^~ /data/[^/]+/files/data/(.+)$ {
+	#		internal;
+	#		alias /mnt/data/photo/$1; 
+	#	}
 
 	# Must be BELOW the "location ~ \.php(?:$|/)" block
 	location ~* \.(?:css|js|woff|svg|gif)$ {
@@ -81,4 +85,16 @@ server {
 		try_files $uri /index.php$uri$is_args$args;
 		access_log off;
 	}
+
+	# Videos
+	location ~* \.mp4$ {
+		try_files $uri /index.php$uri$is_args$args;
+		proxy_buffering off;
+		fastcgi_buffering off;
+		fastcgi_force_ranges on;
+		mp4;
+		mp4_buffer_size 20M;
+		mp4_max_buffer_size 300M;
+	}
+
 }
