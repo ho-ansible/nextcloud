@@ -2,7 +2,7 @@
 ## {{ansible_managed}}
 
 # Setup new cache zone
-fastcgi_cache_path {{ cloud_cache_dir }} levels=1:2 keys_zone=CLOUD:20m inactive=4w max_size=200M use_temp_path=off;
+fastcgi_cache_path {{ cloud_cache_dir }} levels=1:2 keys_zone=CLOUD:20m inactive=4w max_size=1G;
 
 server {
 	listen {{ cloud_port }} ssl http2;
