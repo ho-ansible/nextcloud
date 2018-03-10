@@ -88,7 +88,6 @@ server {
 	# Videos
 	location ~* \.mp4$ {
 		try_files $uri /index.php$uri$is_args$args;
-		proxy_buffering off;
 		fastcgi_buffering off;
 		fastcgi_force_ranges on;
 		mp4;
