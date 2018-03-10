@@ -2,7 +2,7 @@
 ## {{ansible_managed}}
 
 # Setup new cache zone
-fastcgi_cache_path {{ cloud_cache_dir }} levels=1:2 keys_zone=CLOUD:20m inactive=4w max_size=1G;
+fastcgi_cache_path {{ cloud_cache_dir }} levels=1:2 keys_zone=CLOUD:20m inactive=2M max_size=1G;
 
 server {
 	listen {{ cloud_port }} ssl http2;
@@ -21,7 +21,7 @@ server {
 	# Cache results from PHP
 	fastcgi_cache CLOUD;
 	fastcgi_cache_key $http_cookie$request_method$host$request_uri;
-	fastcgi_cache_valid 4w;
+	fastcgi_cache_valid 2w;
 	fastcgi_cache_lock on;
 	fastcgi_cache_use_stale updating error timeout invalid_header http_500;
 	map $request_uri $skip_cache {
