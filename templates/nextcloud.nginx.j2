@@ -1,22 +1,8 @@
 ## Nginx config for nextCloud
 ## {{ansible_managed}}
 
-# Prepare for PHP caching
+# Setup new cache zone
 fastcgi_cache_path {{ cloud_cache_dir }} levels=1:2 keys_zone=CLOUD:20m inactive=4w max_size=200M use_temp_path=off;
-fastcgi_cache_key $http_cookie$request_method$host$request_uri;
-fastcgi_cache_valid 2w;
-fastcgi_cache_methods GET HEAD;
-fastcgi_cache_use_stale updating error timeout invalid_header http_500;
-fastcgi_cache_lock on;
-map $request_uri $skip_cache {
-	default 1;
-	~*/thumbnail.php 0;
-	~*/apps/galleryplus/ 0;
-	~*/apps/gallery/ 0;
-}
-fastcgi_cache_bypass $skip_cache;
-fastcgi_no_cache $skip_cache;
-fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
 
 server {
 	listen {{ cloud_port }} ssl http2;
@@ -24,7 +10,7 @@ server {
 	server_name {{ cloud_server }};
 	root {{ cloud_www_dir }};
 
-	access_log /var/log/nginx/nc-access.log combined gzip=9;
+	access_log /var/log/nginx/nc-access.log combined;
 	error_log  /var/log/nginx/nc-error.log error;
 
 	# See php.ini: upload_max_filesize, post_max_size, max_execution_time, max_input_time
@@ -32,7 +18,21 @@ server {
 	fastcgi_buffers 64 4K;
 	send_timeout 10m;
 
-	fastcgi_cache CLOUD;		# Enable PHP caching
+	# Cache results from PHP
+	fastcgi_cache CLOUD;
+	fastcgi_cache_key $http_cookie$request_method$host$request_uri;
+	fastcgi_cache_valid 2w;
+	fastcgi_cache_methods GET HEAD;
+	fastcgi_cache_use_stale updating error timeout invalid_header http_500;
+	fastcgi_cache_lock on;
+	map $request_uri $skip_cache {
+		default 1;
+		~*/thumbnail.php 0;
+		~*/apps/gallery/ 0;
+	}
+	fastcgi_cache_bypass $skip_cache;
+	fastcgi_no_cache $skip_cache;
+	fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
 
 	error_page 403 /core/templates/403.php;
 	error_page 404 /core/templates/404.php;
