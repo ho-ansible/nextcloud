@@ -47,22 +47,23 @@ server {
 	rewrite ^/(webdav|dav|caldav|calendar|carddav|contacts|files)($|/.*)$ /remote.php/$1/$2 last;
 	rewrite ^/remote($|/.*)$ /remote.php/$1 last;
 
-	# Private locations
-	location ~ ^/(\.|autotest|occ|issue|indie|db_|console|build|tests|config|lib|3rdparty|templates|data)/ {
-		deny all;
-	}
-
-	# General-purpose location blocks
+	# Catch-all if no matching regex location
 	location / {
 		rewrite ^ /index.php$uri last;
 	}
 
+	# Disallowed locations
+	location ~ ^/(\.|autotest|occ|issue|indie|db_|console|build|tests|config|lib|3rdparty|templates|data)/ {
+		deny all;
+	}
+
+	# Allowed subdirs
 	location ~ ^/(?:updater|ocs-provider)(?:$|/) {
 		try_files $uri/ =404;
 		index index.php;
 	}
 
-	# Main block calling PHP
+	# Allowed PHP scripts
 	location ~ ^/(?:index|remote|public|cron|core/ajax/update|status|ocs/v[12]|updater/.+|ocs-provider/.+)\.php(?:$|/) {
 		include php-fpm;
 		fastcgi_param modHeadersAvailable true;         #Avoid sending security headers twice
