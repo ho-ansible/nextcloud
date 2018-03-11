@@ -65,6 +65,7 @@ server {
 	# Main block calling PHP
 	location ~ ^/(?:index|remote|public|cron|core/ajax/update|status|ocs/v[12]|updater/.+|ocs-provider/.+)\.php(?:$|/) {
 		include php-fpm;
+		fastcgi_param modHeadersAvailable true;         #Avoid sending security headers twice
 		fastcgi_param front_controller_active true;
 	}
 
