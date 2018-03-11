@@ -89,13 +89,6 @@ server {
 		mp4;
 		mp4_buffer_size 20M;
 		mp4_max_buffer_size 300M;
-#		fastcgi_param MOD_X_ACCEL_REDIRECT_ENABLED on;
 	}
-
-	# use X-Accel to bypass PHP
-#	location ^~ /data/([^/]+)/files/data/(.+)$ {
-#		internal;
-#		alias /mnt/data/photo/$2; 
-#	}
 
 }
