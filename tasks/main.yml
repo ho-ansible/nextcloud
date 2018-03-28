@@ -117,6 +117,13 @@
     user: www-data
     job: 'php {{ cloud_www_dir }}/occ preview:pre-generate 2>&- >&-'
 
+- name: nextCloud | logrotate
+  tags:
+    - logrotate
+  template:
+    src: logrotate.j2
+    dest: /etc/logrotate.d/nginx
+
 - name: nextCloud | nginx config
   tags:
   - config

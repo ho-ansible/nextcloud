@@ -3,9 +3,11 @@ cloud_version: 13.0.0
 cloud_db_version: 13.0.0.14
 cloud_server: cloud.example.com
 cloud_port: 443
+
 cloud_www_dir: /var/www/nextcloud
 cloud_data_dir: /var/lib/nextcloud
 cloud_cache_dir: /dev/shm/nextcloud
+cloud_log_dir: /var/log/nginx/nextcloud
 
 cloud_db: nextcloud
 cloud_db_host: /var/run/postgresql
