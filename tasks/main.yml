@@ -117,6 +117,9 @@
     user: www-data
     job: 'php {{ cloud_www_dir }}/occ preview:pre-generate 2>&- >&-'
 
+# offsite backup cron:
+# rsync -PaCH -e "ssh -p port -l user" --rsync-path="sudo rsync" data-dir offsite:/dir
+
 - name: nextCloud | logrotate
   tags:
     - logrotate
