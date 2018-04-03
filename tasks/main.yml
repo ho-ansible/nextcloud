@@ -166,3 +166,15 @@
     name: "{{ cloud_db }}"
     owner: "{{ cloud_db_user }}"
 
+- name: nextCloud | iptables
+  tags:
+    - iptables
+  iptables:
+    ip_version: "{{ item }}"
+    chain: INPUT
+    protocol: tcp
+    destination_port: "{{ cloud_port }}"
+    jump: ACCEPT
+  with_items: [ ipv4, ipv6 ]
+  notify: iptables
+
