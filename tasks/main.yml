@@ -75,7 +75,6 @@
     recurse: yes
   with_items:
     - apps
-    - assets
     - config
     - themes
     - updater
