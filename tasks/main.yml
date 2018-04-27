@@ -46,12 +46,11 @@
   - { src: mimetypealiases.json, dest: config/ }
   - { src: user.ini, dest: .user.ini }
 
-- name: nextCloud | set owner/group
+- name: nextCloud | set group
   tags:
     - permissions
   file:
     path: "{{ cloud_www_dir }}"
-    owner: root
     group: www-data
     recurse: yes
 
@@ -76,9 +75,8 @@
   file:
     path: "{{ item }}"
     state: directory
-    owner: www-data
     group: www-data
-    mode: 0750
+    mode: 0770
   with_items:
   - "{{ cloud_data_dir }}"
   - "{{ cloud_cache_dir }}"
