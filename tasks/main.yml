@@ -26,6 +26,7 @@
     version: 'v{{ cloud_version }}'
     depth: 1
     force: yes
+    umask: 0027
 
 - name: nextCloud | config
   tags:
@@ -45,46 +46,33 @@
   - { src: mimetypealiases.json, dest: config/ }
   - { src: user.ini, dest: .user.ini }
 
-- name: nextCloud | secure file perms
+- name: nextCloud | set owner/group
   tags:
     - permissions
   file:
     path: "{{ cloud_www_dir }}"
     owner: root
     group: www-data
-    mode: 'g-w,o='
     recurse: yes
 
-- name: nextCloud | allow dir perms
+- name: nextCloud | writeable paths
   tags:
   - permissions
   file:
     path: "{{ cloud_www_dir }}/{{ item }}"
-    owner: www-data
-    group: www-data
-    mode: 'u+rw'
+    mode: 'g+w'
     recurse: yes
   with_items:
-  - apps
-  - assets
-  - config
-  - themes
-  - updater
-
-- name: nextCloud | allow file perms
-  tags:
-  - permissions
-  file:
-    path: "{{ cloud_www_dir }}/{{ item }}"
-    owner: www-data
-    group: www-data
-    mode: 'u+rw'
-  with_items:
-  - core/js/mimetypelist.js
+    - apps
+    - assets
+    - config
+    - themes
+    - updater:
+    - core/js/mimetypelist.js
 
 - name: nextCloud | data directories
   tags:
-  - dir
+    - dir
   file:
     path: "{{ item }}"
     state: directory
