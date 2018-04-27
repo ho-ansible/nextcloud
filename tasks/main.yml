@@ -28,6 +28,17 @@
     force: yes
     umask: '0027'
 
+- name: nextCloud | apps (git)
+  tags:
+    - git
+  git:
+    repo: "{{ item.value }}"
+    dest: '{{ cloud_www_dir }}/apps/{{ item.key }}'
+    depth: 1
+    force: yes
+    umask: '0007'
+  with_dict: "{{ cloud_apps }}"
+
 - name: nextCloud | config
   tags:
     - config

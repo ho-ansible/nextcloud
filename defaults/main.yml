@@ -18,3 +18,6 @@ cloud_pw: ''
 cloud_secret: ''
 cloud_id: ''
 cloud_db_pw: ''
+
+cloud_apps:
+  gallery: 'https://github.com/nextcloud/gallery'
