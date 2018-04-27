@@ -26,7 +26,7 @@
     version: 'v{{ cloud_version }}'
     depth: 1
     force: yes
-    umask: 0027
+    umask: '0027'
 
 - name: nextCloud | config
   tags:
