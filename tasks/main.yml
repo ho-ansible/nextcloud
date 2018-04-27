@@ -76,7 +76,6 @@
   with_items:
     - apps
     - config
-    - themes
     - updater
 #    - core/js/mimetypelist.js
 
