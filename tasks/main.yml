@@ -21,7 +21,7 @@
     - package
     - git
   git:
-    repo: 'https://github.com/nextcloud/server.git'
+    repo: "{{ cloud_repo }}"
     dest: '{{ cloud_www_dir }}'
     version: 'v{{ cloud_version }}'
     depth: 1
