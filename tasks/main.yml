@@ -34,6 +34,7 @@
   git:
     repo: "{{ item.value }}"
     dest: '{{ cloud_www_dir }}/apps/{{ item.key }}'
+    version: 'v{{ cloud_version }}'
     depth: 1
     force: yes
     umask: '0007'
