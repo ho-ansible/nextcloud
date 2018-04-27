@@ -128,26 +128,10 @@
     dest: /etc/logrotate.d/nginx
 
 - name: nextCloud | nginx config
-  tags:
-  - config
-  - site
-  template:
-    src: "{{ item }}.nginx.j2"
-    dest: /etc/nginx/sites-available/{{ item }}
-  with_items:
-  - nextcloud
-  notify: reload nginx
-
-- name: nextCloud | nginx site enabled
-  tags:
-  - site
-  file:
-    src: /etc/nginx/sites-available/{{ item }}
-    dest: /etc/nginx/sites-enabled/{{ item }}
-    state: link
-  with_items:
-  - nextcloud
-  notify: reload nginx
+  include_role:
+    name: nginx
+    tasks_from: site.yml
+  with_items: nextcloud
 
 - name: nextCloud | DB user
   tags:
