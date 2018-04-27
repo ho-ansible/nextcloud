@@ -44,7 +44,7 @@ server {
 	}
 
 	rewrite ^/.well-known/(.*dav)(?:$|/) /$1 permanent;
-	rewrite ^/(webdav|dav|caldav|calendar|carddav|contacts|files)($|/.*)$ /remote.php/$1/$2 last;
+	rewrite ^/(webdav|dav|caldav|calendar|carddav|contacts|files)($|/.*)$ /remote.php/$1$2 last;
 	rewrite ^/remote($|/.*)$ /remote.php/$1 last;
 
 	# Catch-all if no matching regex location
