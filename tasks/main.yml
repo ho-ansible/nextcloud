@@ -77,7 +77,6 @@
     - apps
     - config
     - updater
-#    - core/js/mimetypelist.js
 
 - name: nextCloud | data directories
   tags:
