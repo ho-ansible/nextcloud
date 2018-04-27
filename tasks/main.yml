@@ -66,8 +66,8 @@
     - assets
     - config
     - themes
-    - updater:
-    - core/js/mimetypelist.js
+    - updater
+#    - core/js/mimetypelist.js
 
 - name: nextCloud | data directories
   tags:
