@@ -26,7 +26,6 @@
     version: 'v{{ cloud_version }}'
     depth: 1
     force: yes
-    umask: '0027'
 
 - name: nextCloud | apps (git)
   tags:
@@ -37,15 +36,18 @@
     version: 'v{{ cloud_version }}'
     depth: 1
     force: yes
-    umask: '0007'
   with_dict: "{{ cloud_apps }}"
 
 - name: nextCloud | config
   tags:
     - config
   template:
-    src: config.php.j2
-    dest: "{{ cloud_www_dir }}/config/config.php"
+    src: "{{ item }}.j2"
+    owner: www-data
+    mode: 0640
+    dest: "{{ cloud_www_dir }}/config/{{ item }}"
+  with_items: 
+    - config.php
 
 - name: nextCloud | copy config (MIME, PHP)
   tags:
@@ -71,7 +73,7 @@
   - permissions
   file:
     path: "{{ cloud_www_dir }}/{{ item }}"
-    mode: 'g+w'
+    owner: www-data
     recurse: yes
   with_items:
     - apps
