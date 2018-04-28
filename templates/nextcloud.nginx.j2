@@ -69,6 +69,7 @@ server {
 		fastcgi_param modHeadersAvailable true;         #Avoid sending security headers twice
 		fastcgi_param front_controller_active true;
 		fastcgi_buffering off;
+		fastcgi_request_buffering off;
 		fastcgi_force_ranges on;
 	}
 
