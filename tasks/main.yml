@@ -5,16 +5,15 @@
   tags:
     - package
   package:
-    name: "{{ item }}"
-  with_items:
-    - php-pgsql
-    - php-curl
-    - php-gd
-    - php-apcu
-    - php-xml
-    - php-mbstring
-    - php-zip
-    - ffmpeg
+    name: 
+      - php-pgsql
+      - php-curl
+      - php-gd
+      - php-apcu
+      - php-xml
+      - php-mbstring
+      - php-zip
+      - ffmpeg
 
 - name: nextCloud | install (git)
   tags:
