@@ -35,18 +35,16 @@
     version: 'v{{ cloud_version }}'
     depth: 1
     force: yes
-  with_dict: "{{ cloud_apps }}"
+  loop: "{{ q('dict', cloud_apps) }}"
 
 - name: nextCloud | config
   tags:
     - config
   template:
-    src: "{{ item }}.j2"
+    src: config.php.j2
     owner: www-data
     mode: 0640
-    dest: "{{ cloud_www_dir }}/config/{{ item }}"
-  with_items: 
-    - config.php
+    dest: "{{ cloud_www_dir }}/config/config.php"
 
 - name: nextCloud | copy config (MIME, PHP)
   tags:
@@ -54,10 +52,10 @@
   copy:
     src: "{{ item.src }}"
     dest: "{{ cloud_www_dir }}/{{ item.dest }}"
-  with_items:
-  - { src: mimetypemapping.json, dest: config/ }
-  - { src: mimetypealiases.json, dest: config/ }
-  - { src: user.ini, dest: .user.ini }
+  loop:
+    - { src: mimetypemapping.json, dest: config/ }
+    - { src: mimetypealiases.json, dest: config/ }
+    - { src: user.ini, dest: .user.ini }
 
 - name: nextCloud | set group
   tags:
@@ -74,7 +72,7 @@
     path: "{{ cloud_www_dir }}/{{ item }}"
     owner: www-data
     recurse: yes
-  with_items:
+  loop:
     - apps
     - config
     - updater
@@ -87,9 +85,9 @@
     state: directory
     group: www-data
     mode: 0770
-  with_items:
-  - "{{ cloud_data_dir }}"
-  - "{{ cloud_cache_dir }}"
+  loop:
+    - "{{ cloud_data_dir }}"
+    - "{{ cloud_cache_dir }}"
 
 - name: nextCloud | cron
   tags:
@@ -119,7 +117,7 @@
   include_role:
     name: nginx
     tasks_from: site.yml
-  with_items: nextcloud
+  loop: [ nextcloud ]
 
 - name: nextCloud | DB user
   tags:
@@ -147,6 +145,6 @@
     protocol: tcp
     destination_port: "{{ cloud_port }}"
     jump: ACCEPT
-  with_items: [ ipv4, ipv6 ]
+  loop: [ ipv4, ipv6 ]
   notify: iptables
 
