@@ -114,10 +114,11 @@
 # rsync -PaCH -e "ssh -p port -l user" --rsync-path="sudo rsync" data-dir offsite:/dir
 
 - name: nextCloud | nginx config
+  vars:
+    site: nextcloud
   include_role:
     name: nginx
     tasks_from: site.yml
-  loop: [ nextcloud ]
 
 - name: nextCloud | DB user
   tags:
