@@ -21,7 +21,7 @@ server {
 	# See php.ini: upload_max_filesize, post_max_size, max_execution_time, max_input_time
 	client_max_body_size 10G;
 	fastcgi_buffers 64 4K;
-	send_timeout 30m;
+	send_timeout 1h;
 
 	# Cache results from PHP
 	fastcgi_cache CLOUD;
