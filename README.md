@@ -5,30 +5,30 @@ PHP-based WebDAV file / calendar / contacts server
 Only tested on Debian stable, for now.
 
 ## Role Variables
-```
-cloud_version: 13.0.2
-cloud_db_version: 13.0.2.1
-cloud_server: cloud.example.com
-cloud_port: 443
+### Nginx config
++ `cloud_server`: external hostname (nginx virtual host) for URL
++ `cloud_port` (default: 443): public port for nginx to listen on
 
-cloud_www_dir: /var/www/nextcloud
-cloud_data_dir: /var/lib/nextcloud
-cloud_cache_dir: /dev/shm/nextcloud
+### Directories
++ `cloud_www_dir` (default: /var/www/nextcloud): where to install nextcloud
++ `cloud_data_dir` (default: /var/lib/nextcloud): where to store files
++ `cloud_cache_dir` (default: /dev/shm/nextcloud): php-fpm cache
 
-cloud_db: nextcloud
-cloud_db_host: /var/run/postgresql
-cloud_db_user: nextcloud
-cloud_db_prefix: 'oc_'
+### Database
++ `cloud_db` (default: nextcloud): name of database
++ `cloud_db_host` (default: /var/run/postgresql): host or unix socket
++ `cloud_db_user` (default: nextcloud): username within DB
++ `cloud_db_prefix` (default: 'oc_'): all table names start with this
 
-cloud_pw: ''
-cloud_secret: ''
-cloud_id: ''
-cloud_db_pw: ''
+### Authentication
++ `cloud_pw`:
++ `cloud_secret`:
++ `cloud_id`: uniquely identifies this instance
++ `cloud_db_pw`: database credentials
 
-cloud_apps:
-  gallery: 'https://github.com/nextcloud/gallery'
-
-```
+### Additional
++ `cloud_apps` (default: gallery app): dict of (name: URL) pairs
+  of nextCloud apps to install
 
 ## Dependencies
 + nginx
