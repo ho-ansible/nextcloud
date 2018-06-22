@@ -1,6 +1,4 @@
 ---
-cloud_version: 13.0.2
-cloud_db_version: 13.0.2.1
 cloud_server: cloud.example.com
 cloud_port: 443
 
