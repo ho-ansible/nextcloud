@@ -1,4 +1,4 @@
 ---
 cloud_repo: 'https://github.com/nextcloud/server'
-cloud_version: 13.0.5
-cloud_db_version: 13.0.5.2
+cloud_version: 14.0.1
+cloud_db_version: 14.0.1.1
