@@ -12,6 +12,7 @@
       - php-apcu
       - php-xml
       - php-mbstring
+      - php-intl
       - php-zip
       - ffmpeg
 
