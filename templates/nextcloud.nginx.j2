@@ -33,8 +33,8 @@ server {
 	fastcgi_no_cache $skip_cache;
 	fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
 
-  # Security headers (do not cascade)
-  include conf.d/headers.conf;
+	# Security headers (not inherited)
+	include conf.d/headers.conf;
 
 	# Standard specific locations
 	location = /robots.txt {
