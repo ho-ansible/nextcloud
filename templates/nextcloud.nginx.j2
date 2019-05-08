@@ -33,19 +33,18 @@ server {
 	fastcgi_no_cache $skip_cache;
 	fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
 
-	# Standard specific locations
-	error_page 403 /core/templates/403.php;
-	error_page 404 /core/templates/404.php;
+  # Security headers (do not cascade)
+  include conf.d/headers.conf;
 
+	# Standard specific locations
 	location = /robots.txt {
-		allow all;
 		log_not_found off;
 		access_log off;
 	}
 
-	rewrite ^/.well-known/(.*dav)(?:$|/) /$1 permanent;
-	rewrite ^/(webdav|dav|caldav|calendar|carddav|contacts|files)($|/.*)$ /remote.php/$1$2 last;
-	rewrite ^/remote($|/.*)$ /remote.php/$1 last;
+	location ~ ^\/\.well-known\/[^/]*dav(?:$|\/) {
+		return 301 $scheme://$host/remote.php/dav;
+	}
 
 	# Catch-all if no matching regex location
 	location / {
@@ -53,20 +52,15 @@ server {
 	}
 
 	# Disallowed locations
-	location ~ ^/(\.|autotest|occ|issue|indie|db_|console|build|tests|config|lib|3rdparty|templates|data)/ {
+	location ~ ^\/(?:\.|autotest|occ|issue|indie|db_|console|build|tests|config|lib|3rdparty|templates|data)(?:$|\/) {
 		deny all;
 	}
 
-	# Allowed subdirs
-	location ~ ^/(?:updater|ocs-provider)(?:$|/) {
-		try_files $uri/ =404;
-		index index.php;
-	}
-
 	# Allowed PHP scripts
-	location ~ ^/(?:index|remote|public|cron|core/ajax/update|status|ocs/v[12]|updater/.+|ocs-provider/.+)\.php(?:$|/) {
+	location ~ ^\/(?:index|remote|public|cron|core\/ajax\/update|status|ocs\/v[12]|updater\/.+|oc[ms]-provider\/.+)\.php(?:$|\/) {
 		include php-fpm;
 		include conf.d/headers.conf;
+		fastcgi_hide_header X-Powered-By;
 		fastcgi_param modHeadersAvailable true;         #Avoid sending security headers twice
 		fastcgi_param front_controller_active true;
 		fastcgi_buffering off;
@@ -74,15 +68,25 @@ server {
 		fastcgi_force_ranges on;
 	}
 
-	# Other assets (after PHP block)
-	location ~* \.(?:css|js|woff|svg|gif)$ {
-		try_files $uri /index.php$uri$is_args$args;
+	# Allowed subdirs
+	location ~ ^\/(?:updater|oc[ms]-provider)(?:$|\/) {
+		try_files $uri/ =404;
+		index index.php;
+		include conf.d/headers.conf;
+	}
+
+	# Static cacheable assets
+	location ~ \.(?:css|js|woff|svg|gif)$ {
+		try_files $uri /index.php$request_uri;
+		include conf.d/headers.conf;
 		access_log off;
 		expires 14d;
 	}
 
-	location ~* \.(?:png|html|ttf|ico|jpg|jpeg)$ {
-		try_files $uri /index.php$uri$is_args$args;
+	# Other assets
+	location ~ \.(?:png|html|ttf|ico|jpg|jpeg)$ {
+		try_files $uri /index.php$request_uri;
+		include conf.d/headers.conf;
 		access_log off;
 	}
 
