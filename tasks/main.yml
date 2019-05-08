@@ -13,6 +13,7 @@
       - php-xml
       - php-mbstring
       - php-intl
+      - php-imagick
       - php-zip
       - ffmpeg
 
