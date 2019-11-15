@@ -48,7 +48,7 @@ server {
 
 	# Catch-all if no matching regex location
 	location / {
-		rewrite ^ /index.php$uri last;
+		rewrite ^ /index.php last;
 	}
 
 	# Disallowed locations
@@ -60,6 +60,7 @@ server {
 	location ~ ^\/(?:index|remote|public|cron|core\/ajax\/update|status|ocs\/v[12]|updater\/.+|oc[ms]-provider\/.+)\.php(?:$|\/) {
 		include php-fpm;
 		include conf.d/headers.conf;
+		try_files $fastcgi_script_name =404;
 		fastcgi_hide_header X-Powered-By;
 		fastcgi_param modHeadersAvailable true;         #Avoid sending security headers twice
 		fastcgi_param front_controller_active true;
