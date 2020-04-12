@@ -17,4 +17,4 @@ cloud_id: ''
 cloud_db_pw: ''
 
 cloud_apps:
-  gallery: 'https://github.com/nextcloud/gallery'
+  photos: 'https://github.com/nextcloud/photos'
