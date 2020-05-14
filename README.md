@@ -7,7 +7,7 @@ Only tested on Debian stable, for now.
 ## Role Variables
 ### Nginx config
 + `cloud_server`: external hostname (nginx virtual host) for URL
-+ `cloud_port` (default: 443): public port for nginx to listen on
++ `cloud_listen`: nginx `listen` directives (e.g., IP and port)
 
 ### Directories
 + `cloud_www_dir` (default: /var/www/nextcloud): where to install nextcloud

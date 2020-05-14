@@ -10,8 +10,9 @@ map $request_uri $skip_cache {
 }
 
 server {
-	listen {{ cloud_port }} ssl http2;
-	listen [::]:{{ cloud_port }} ssl http2;
+{% for listen in cloud_listen %}
+	listen {{ listen }};
+{% endfor %}
 	server_name {{ cloud_server }};
 	root {{ cloud_www_dir }};
 

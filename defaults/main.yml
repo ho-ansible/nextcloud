@@ -1,6 +1,8 @@
 ---
 cloud_server: cloud.example.com
-cloud_port: "443"
+cloud_listen:
+  - "443 ssl http2"
+  - "[::]:443 ssl http2"
 
 cloud_www_dir: /var/www/nextcloud
 cloud_data_dir: /var/lib/nextcloud
