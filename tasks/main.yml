@@ -7,8 +7,10 @@
   package:
     name: 
       - php-pgsql
+      - php-bcmath
       - php-curl
       - php-gd
+      - php-gmp
       - php-apcu
       - php-xml
       - php-mbstring
