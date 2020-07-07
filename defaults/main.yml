@@ -18,5 +18,4 @@ cloud_secret: ''
 cloud_id: ''
 cloud_db_pw: ''
 
-cloud_apps:
-  photos: 'https://github.com/nextcloud/photos'
+cloud_apps: {}

@@ -27,7 +27,7 @@ Only tested on Debian stable, for now.
 + `cloud_db_pw`: database credentials
 
 ### Additional
-+ `cloud_apps` (default: gallery app): dict of (name: URL) pairs
++ `cloud_apps` (default: none): dict of (name: URL) pairs
   of nextCloud apps to install
 
 ## Dependencies
