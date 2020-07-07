@@ -4,19 +4,7 @@
   tags:
     - package
   package:
-    name: 
-      - php-pgsql
-      - php-bcmath
-      - php-curl
-      - php-gd
-      - php-gmp
-      - php-apcu
-      - php-xml
-      - php-mbstring
-      - php-intl
-      - php-imagick
-      - php-zip
-      - ffmpeg
+    name: "{{ cloud_deps }}"
 
 - name: nextCloud | install (git)
   tags:
