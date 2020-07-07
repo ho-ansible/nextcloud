@@ -18,7 +18,7 @@ Only tested on Debian stable, for now.
 + `cloud_db` (default: nextcloud): name of database
 + `cloud_db_host` (default: /var/run/postgresql): host or unix socket
 + `cloud_db_user` (default: nextcloud): username within DB
-+ `cloud_db_prefix` (default: 'oc_'): all table names start with this
++ `cloud_db_prefix` (default: `oc_`): all table names start with this
 
 ### Authentication
 + `cloud_pw`:
@@ -47,4 +47,5 @@ Only tested on Debian stable, for now.
 MIT
 
 ## Author Information
-Sean Ho, https://github.com/ho-ansible/
++ Sean Ho, https://github.com/ho-ansible/
++ Thanks to [Paragon](https://gitlab.paragon-es.de/ansible-roles/nextcloud/blob/master/tasks/install.yml)
