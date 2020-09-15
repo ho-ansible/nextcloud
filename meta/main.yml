@@ -8,16 +8,15 @@ galaxy_info:
   min_ansible_version: 1.2
 
   platforms:
-   - name: Debian
-     versions:
-     - stable
-     - 10
+  - name: Debian
+    versions:
+    - 10
 
   galaxy_tags:
-    - cloud
-    - storage
+  - cloud
+  - storage
 
 dependencies:
-  - role: nginx
-  - role: php
-  - role: postgres
+- role: nginx
+- role: php
+- role: postgres

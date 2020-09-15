@@ -1,0 +1,12 @@
+#! /usr/bin/env ansible-playbook
+# Configure nextcloud file sharing
+# Replace 'nextcloud' with your own inventory group
+---
+- name: nextcloud | file sharing
+  hosts: nextcloud
+  roles:
+  - role: nextcloud
+    tags:
+    - nextcloud
+    - cloud
+    - storage

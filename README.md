@@ -1,8 +1,12 @@
 # Ansible role: nextcloud
 PHP-based WebDAV file / calendar / contacts server
 
+## DEPRECATED
+Installation of this app has been moved to kubernetes,
+so this ansible role is no longer maintained.
+
 ## Requirements
-Only tested on Debian stable, for now.
+Only tested on Debian buster.
 
 ## Role Variables
 ### Nginx config
@@ -30,18 +34,14 @@ Only tested on Debian stable, for now.
 + `cloud_apps` (default: none): dict of (name: URL) pairs
   of nextCloud apps to install
 
+## Playbooks
++ `main.yml`: apply role
++ `uninstall.yml`: remove. Run before removing config from inventory.
+
 ## Dependencies
-+ nginx
-+ php-fpm
-+ PostgreSQL
-
-## Example Playbook
-
-```
-- hosts: nextcloud
-  roles:
-    - { role: ho-ansible.nextcloud }
-```
++ [ho-ansible.nginx](https://github.com/ho-ansible/nginx)
++ [ho-ansible.php-fpm](https://github.com/ho-ansible/php-fpm)
++ [ho-ansible.postgres](https://github.com/ho-ansible/postgres)
 
 ## License
 MIT
