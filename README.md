@@ -44,8 +44,8 @@ Only tested on Debian buster.
 + [ho-ansible.postgres](https://github.com/ho-ansible/postgres)
 
 ## License
-MIT
++ Ansible role licensed [MIT](LICENSE)
 
 ## Author Information
-+ Sean Ho, https://github.com/ho-ansible/
++ Ansible role by [Sean Ho](https://github.com/ho-ansible/)
 + Thanks to [Paragon](https://gitlab.paragon-es.de/ansible-roles/nextcloud/blob/master/tasks/install.yml)

@@ -2,14 +2,14 @@
 
 - name: nextCloud | dependencies
   tags:
-    - package
+  - package
   package:
     name: "{{ cloud_deps }}"
 
 - name: nextCloud | install (git)
   tags:
-    - package
-    - git
+  - package
+  - git
   git:
     repo: "{{ cloud_repo }}"
     dest: '{{ cloud_www_dir }}'
@@ -19,7 +19,7 @@
 
 - name: nextCloud | apps (git)
   tags:
-    - git
+  - git
   git:
     repo: "{{ item.value }}"
     dest: '{{ cloud_www_dir }}/apps/{{ item.key }}'
@@ -30,7 +30,7 @@
 
 - name: nextCloud | config
   tags:
-    - config
+  - config
   template:
     src: config.php.j2
     owner: www-data
@@ -39,18 +39,18 @@
 
 - name: nextCloud | copy config (MIME, PHP)
   tags:
-    - config
+  - config
   copy:
     src: "{{ item.src }}"
     dest: "{{ cloud_www_dir }}/{{ item.dest }}"
   loop:
-    - { src: mimetypemapping.json, dest: config/ }
-    - { src: mimetypealiases.json, dest: config/ }
-    - { src: user.ini, dest: .user.ini }
+  - { src: mimetypemapping.json, dest: config/ }
+  - { src: mimetypealiases.json, dest: config/ }
+  - { src: user.ini, dest: .user.ini }
 
 - name: nextCloud | set group
   tags:
-    - permissions
+  - permissions
   file:
     path: "{{ cloud_www_dir }}"
     group: www-data
@@ -64,21 +64,21 @@
     owner: www-data
     recurse: yes
   loop:
-    - apps
-    - config
-    - updater
+  - apps
+  - config
+  - updater
 
 - name: nextCloud | data directories
   tags:
-    - dir
+  - dir
   file:
     path: "{{ item }}"
     state: directory
     group: www-data
     mode: 0770
   loop:
-    - "{{ cloud_data_dir }}"
-    - "{{ cloud_cache_dir }}"
+  - "{{ cloud_data_dir }}"
+  - "{{ cloud_cache_dir }}"
 
 - name: nextCloud | cron
   tags:

@@ -3,15 +3,15 @@ cloud_repo: 'https://github.com/nextcloud/server'
 cloud_version: 19.0.0
 cloud_db_version: 19.0.0.12
 cloud_deps:
-  - php-pgsql
-  - php-bcmath
-  - php-curl
-  - php-gd
-  - php-gmp
-  - php-apcu
-  - php-xml
-  - php-mbstring
-  - php-intl
-  - php-imagick
-  - php-zip
-  - ffmpeg
+- php-pgsql
+- php-bcmath
+- php-curl
+- php-gd
+- php-gmp
+- php-apcu
+- php-xml
+- php-mbstring
+- php-intl
+- php-imagick
+- php-zip
+- ffmpeg
