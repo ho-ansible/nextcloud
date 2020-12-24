@@ -60,7 +60,6 @@ server {
 	# Allowed PHP scripts
 	location ~ ^\/(?:index|remote|public|cron|core\/ajax\/update|status|ocs\/v[12]|updater\/.+|oc[ms]-provider\/.+)\.php(?:$|\/) {
 		include php-fpm;
-		include conf.d/headers.conf;
 		try_files $fastcgi_script_name =404;
 		fastcgi_hide_header X-Powered-By;
 		fastcgi_param modHeadersAvailable true;         #Avoid sending security headers twice
@@ -74,13 +73,11 @@ server {
 	location ~ ^\/(?:updater|oc[ms]-provider)(?:$|\/) {
 		try_files $uri/ =404;
 		index index.php;
-		include conf.d/headers.conf;
 	}
 
 	# Static cacheable assets
 	location ~ \.(?:css|js|woff2?|svg|gif)$ {
 		try_files $uri /index.php$request_uri;
-		include conf.d/headers.conf;
 		access_log off;
 		expires 14d;
 	}
@@ -88,7 +85,6 @@ server {
 	# Other assets
 	location ~ \.(?:png|html|ttf|ico|jpg|jpeg)$ {
 		try_files $uri /index.php$request_uri;
-		include conf.d/headers.conf;
 		access_log off;
 	}
 
