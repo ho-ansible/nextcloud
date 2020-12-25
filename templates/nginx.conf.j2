@@ -76,16 +76,10 @@ server {
 	}
 
 	# Static cacheable assets
-	location ~ \.(?:css|js|woff2?|svg|gif)$ {
+	location ~ \.(?:css|js|html|ttf|woff2?|ico|svg|gif|png|jpg|jpeg)$ {
 		try_files $uri /index.php$request_uri;
 		access_log off;
 		expires 14d;
-	}
-
-	# Other assets
-	location ~ \.(?:png|html|ttf|ico|jpg|jpeg)$ {
-		try_files $uri /index.php$request_uri;
-		access_log off;
 	}
 
 }
