@@ -1,7 +1,7 @@
 ---
 cloud_repo: 'https://github.com/nextcloud/server'
-cloud_version: 20.0.0
-cloud_db_version: 20.0.0.9
+cloud_version: 20.0.4
+cloud_db_version: 20.0.4.0
 cloud_deps:
 - php-pgsql
 - php-bcmath
