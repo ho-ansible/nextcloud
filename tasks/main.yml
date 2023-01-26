@@ -103,7 +103,7 @@
 
 - name: nextCloud | nginx config
   vars:
-    site: nextcloud
+    site_name: nextcloud
   include_role:
     name: nginx
     tasks_from: site.yml
