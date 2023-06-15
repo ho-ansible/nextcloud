@@ -15,7 +15,7 @@
     dest: '{{ cloud_www_dir }}'
     version: 'v{{ cloud_version }}'
     depth: 1
-    force: yes
+    force: true
 
 - name: nextCloud | apps (git)
   tags:
